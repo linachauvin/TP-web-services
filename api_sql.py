@@ -28,7 +28,7 @@ def get_users():
             "job": row[5],
         }
         data.append(user)
-    return jsonify(data) on retourne sur le web les différents lignes sous format document JSON qu'on peut ensuite télécharger
+    return jsonify(data) #on retourne sur le web les différents lignes sous format document JSON qu'on peut ensuite télécharger
     #[
     #     {
     #         "id":1,
