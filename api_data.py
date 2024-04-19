@@ -26,7 +26,7 @@ def get_users():
             'email': user.email,
             'job': user.job
         })
-    return jsonify(user_data)
+    return jsonify(user_data) #on récupère le fichier sous format json
 
 @app.route('/applications', methods=['GET']) #on définit la route qui nous permet de récupérer nos données http://localhost:8081/applications
 def get_applications():
@@ -40,7 +40,7 @@ def get_applications():
             'lastconnection': app.lastconnection.isoformat(),
             'user_id': app.user_id
         })
-    return jsonify(app_data)
+    return jsonify(app_data) #on récupère le fichier sous format json
     
 #On crée deux classes qui représentent nos deux tables users et applications
 class users(db.Model):
