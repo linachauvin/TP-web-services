@@ -12,7 +12,8 @@ db = SQLAlchemy(app)
 
 from flask import jsonify
 
-@app.route('/users', methods=['GET'])
+#on implémente la méthode GET qui permet de récupérer les données des deux tables 
+@app.route('/users', methods=['GET']) #on définit la route qui nous permet de récupérer nos données http://localhost:8081/users
 def get_users():
     users_list = users.query.all()
     user_data = []
@@ -27,7 +28,7 @@ def get_users():
         })
     return jsonify(user_data)
 
-@app.route('/applications', methods=['GET'])
+@app.route('/applications', methods=['GET']) #on définit la route qui nous permet de récupérer nos données http://localhost:8081/applications
 def get_applications():
     applications_list = Application.query.all()
     app_data = []
@@ -41,6 +42,7 @@ def get_applications():
         })
     return jsonify(app_data)
     
+#On crée deux classes qui représentent nos deux tables users et applications
 class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(100))
@@ -72,6 +74,7 @@ class Application(db.Model):
 
 fake = Faker()
 
+# c'est grâce à la fonction poppulat_tables() que nous pouvons remplir les deux tables de données
 def populate_tables():
     apps = ["Facebook", "Instagram", "TikTok", "Twitter"]
     for _ in range(100):
