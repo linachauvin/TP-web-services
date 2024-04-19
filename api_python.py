@@ -7,7 +7,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://root:root@localhost:5432/p
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
-
+#on crée deux classes qui representent les deux tables User et Application.
 class users(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     firstname = db.Column(db.String(100))
@@ -34,7 +34,7 @@ class Application(db.Model):
         self.appname = appname
         self.username = username
         self.lastconnection = lastconnection
-
+#On supprime et création des tables
 with app.app_context():
     db.drop_all()
     db.create_all()
