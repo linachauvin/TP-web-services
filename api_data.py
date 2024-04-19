@@ -11,6 +11,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 from flask import jsonify
+from flask import request
 
 #on implémente la méthode GET qui permet de récupérer les données des deux tables 
 @app.route('/users', methods=['GET']) #on définit la route qui nous permet de récupérer nos données http://localhost:8081/users
