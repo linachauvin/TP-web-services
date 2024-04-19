@@ -17,6 +17,7 @@ class users(db.Model):
     age = db.Column(db.Integer)
     email = db.Column(db.String(100))
     job = db.Column(db.String(100))
+    applications = db.relationship('Application', backref='user', lazy=True)
 
     def __init__(self, firstname, lastname, age, email, job):
         self.firstname = firstname
@@ -32,10 +33,11 @@ class Application(db.Model):
     lastconnection = db.Column(db.DateTime, default=datetime.utcnow)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
 
-    def __init__(self, appname, username, lastconnection=None):
+    def __init__(self, appname, username, lastconnection=None, user_id=None):
         self.appname = appname
         self.username = username
         self.lastconnection = lastconnection
+        self.user_id = user_id
 
 fake = Faker()
 
@@ -50,6 +52,13 @@ def populate_tables():
         user = users(firstname=firstname, lastname=lastname, age=age, email=email, job=job)
         db.session.add(user)
         db.session.commit()
+
+        user_id = user.id
+        appname = random.choice(apps)
+        username = fake.user_name()
+        lastconnection = fake.date_time_between(start_date='-1y', end_date='now')
+        application = Application(appname=appname, username=username, lastconnection=lastconnection, user_id=user_id)
+        db.session.add(application)
 
 if __name__ == "__main__":
     with app.app_context():
